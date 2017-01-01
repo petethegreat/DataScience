@@ -1,0 +1,1 @@
+ignore test, should not see specdata directory here
