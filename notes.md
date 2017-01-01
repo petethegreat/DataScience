@@ -3,6 +3,7 @@
 
 ## logic
 
+### elementwise operation
 
 logical comparisons operate elementwise (generally). The shorter thing being compared is recycled to match the length of the longer thing. 
 
@@ -26,10 +27,22 @@ operators & (and) and | (or) operate elementwise, but && and || only evaluate th
 [1] TRUE
 ```
 
+### assignemnt
 The output of a logical operation can be assigned to a variable
 ```R
 > x<- if (2>3) {1} else { if (3 < 4) {2} else {3} }
 > x
 [1] 2
+```
+
+### Order of operations
+
+and operators are evaluated before ors
+
+```R
+>  FALSE && FALSE || TRUE && TRUE
+[1] TRUE
+>  FALSE && (FALSE || TRUE) && TRUE
+[1] FALSE
 ```
 
