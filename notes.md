@@ -45,4 +45,7 @@ and operators are evaluated before ors
 >  FALSE && (FALSE || TRUE) && TRUE
 [1] FALSE
 ```
+## Date and time
+
+function strptime() is handy
 
