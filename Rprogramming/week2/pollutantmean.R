@@ -27,8 +27,8 @@ return()
 # loop over files. keep track of the total number of (not missing) entries, and their sum
 # after loop, take mean as sum/count
 
-sum<-0
-count<-0
+mysum<-0
+mycount<-0
 
 for (i in id)
 {
@@ -45,13 +45,13 @@ for (i in id)
     
     notmissing<-theframe[!is.na(theframe[,pollutant]),pollutant]
     thecount <-length(notmissing)
-    sum<-sum + thesum
-    count<- count + thecount
+    mysum<-mysum + thesum
+    mycount<- mycount + thecount
     #output<-sprintf('file %s: sum = %f, count = %d',filename,thesum,thecount)
     #print(output)
 }
 
-return(sum/count)
+return(mysum/mycount)
 
 
 
