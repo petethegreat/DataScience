@@ -55,5 +55,12 @@ variables that are not defined within a function, or which are not arguments to 
 This can be used in cool ways, look up the optimisation notes from week2 of R programming.
 Essentially, you can have a "generator" function that loads the data and defines an objective function. The objective function then knows what the data is - it does not need to be (clumsily) passed through arguments somehow, or bundled with the function as an object, it is just there. The only arguments to the objective function are then parameters that can be optimised (e.g. the mean and width of a gaussian).
 
+# apply functions
+- lapply - list apply. takes a list/vector/matrix as input, as well as a function (and optionally, some arguments to that function). For each element in the input container, the function (with additional arguments, if applicable) is applied. output is returned as a list (always). This is handy, as instead of looping over a container and invoking the function at each iteration, the whole loop can be condensed into a single invocation of lapply
+- sapply - like lapply, but with simplification. If all the outputs from lapply would be the same class, then sapply coerces the output into a vector, instead of returning a list. 
+- apply - a little different, assumes the input is a matrix, and will apply the function to a row/column of input at a time. e.g. apply(X,1,mean) will return a vector in which each element is the mean value accross a row of X (dimension 1 -> rows, dimension 2-> columns,etc). If the applied function returns a vector of length l, then the output from apply is an array of with l rows, and one column for each applied-to row/column.
+- mapply - multivariate lapply. takes multiple vectors/lists (of the same length) as input, iterates over all of them simultaneously, and supplys elements of these as arguments to the function. Additional (nonvarying) arguments to the function may also be supplied.
+ - tapply - table apply
+   
 
 
