@@ -36,6 +36,9 @@ for (i in id)
     #print(paste('loading file',filename))
 
     theframe<-read.csv(filename) # load dataframe
+    notmissing<-theframe[!is.na(theframe[,pollutant]),pollutant]
+    thecount <-length(notmissing)
+    if (thecount ==0) next
     thesum <- sum(theframe[pollutant],na.rm=TRUE) # take the sum of the pollutant column, ignoring na
     
     # extract the not missing values of the pollutant from the dataframe
@@ -43,8 +46,7 @@ for (i in id)
     # want the rows where pollutant is not missing : !is.na(theframe[,pollutant])
     # only want the pollutant column
     
-    notmissing<-theframe[!is.na(theframe[,pollutant]),pollutant]
-    thecount <-length(notmissing)
+    
     mysum<-mysum + thesum
     mycount<- mycount + thecount
     #output<-sprintf('file %s: sum = %f, count = %d',filename,thesum,thecount)

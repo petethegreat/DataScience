@@ -47,5 +47,13 @@ and operators are evaluated before ors
 ```
 ## Date and time
 
-function strptime() is handy
+function strptime() is handy, can be used to extract time/date from a string, specify the format and strp will pull the date from a string
+
+# lexical scoping
+
+variables that are not defined within a function, or which are not arguments to the function will be looked up **from the environment in which the function is defined**. 
+This can be used in cool ways, look up the optimisation notes from week2 of R programming.
+Essentially, you can have a "generator" function that loads the data and defines an objective function. The objective function then knows what the data is - it does not need to be (clumsily) passed through arguments somehow, or bundled with the function as an object, it is just there. The only arguments to the objective function are then parameters that can be optimised (e.g. the mean and width of a gaussian).
+
+
 
