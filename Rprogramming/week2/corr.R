@@ -1,5 +1,25 @@
 
+# second attempt, only one loop, but not sure if it's much faster.
 corr<-function(directory,threshold=0)
+{
+    corrvec<-numeric(length=0)
+    for (theid in 1:332)
+    {
+        filename<-sprintf('%s/%03d.csv',directory,theid)
+        theframe<-read.csv(filename)
+        if (sum(complete.cases(theframe)) > threshold)
+        {
+            thecor<-cor(theframe$nitrate,theframe$sulfate,use='complete.obs')
+            corrvec<-c(corrvec,thecor)
+        }
+    }
+    return(corrvec)
+
+}
+#####################################################
+
+# this works, but is slow. 
+oldcorr<-function(directory,threshold=0)
 {
 #make use of the complete function from part 2. 
 # It's copied and renamed below, so that everything needed is in this file
@@ -17,7 +37,9 @@ thecount<-sum(abovethres)
 correlations<-numeric(length=thecount)
 
 if (thecount==0)
-{return(correlations)}
+{
+    return(correlations)
+}
 
 for (index in 1:thecount)
 {
@@ -30,7 +52,7 @@ for (index in 1:thecount)
 return(correlations)
 
 }
-
+####################################################################
 complete2<-function(directory,id=1:332)
 {
 
