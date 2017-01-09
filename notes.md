@@ -27,7 +27,7 @@ operators & (and) and | (or) operate elementwise, but && and || only evaluate th
 [1] TRUE
 ```
 
-### assignemnt
+### assignment
 The output of a logical operation can be assigned to a variable
 ```R
 > x<- if (2>3) {1} else { if (3 < 4) {2} else {3} }
@@ -60,7 +60,59 @@ Essentially, you can have a "generator" function that loads the data and defines
 - sapply - like lapply, but with simplification. If all the outputs from lapply would be the same class, then sapply coerces the output into a vector, instead of returning a list. 
 - apply - a little different, assumes the input is a matrix, and will apply the function to a row/column of input at a time. e.g. apply(X,1,mean) will return a vector in which each element is the mean value accross a row of X (dimension 1 -> rows, dimension 2-> columns,etc). If the applied function returns a vector of length l, then the output from apply is an array of with l rows, and one column for each applied-to row/column.
 - mapply - multivariate lapply. takes multiple vectors/lists (of the same length) as input, iterates over all of them simultaneously, and supplys elements of these as arguments to the function. Additional (nonvarying) arguments to the function may also be supplied.
- - tapply - table apply
-   
+ - tapply - tapply(data$column,factor$column,fucntion) -splits the data (first argument, data$cloumn) up based on factor$column. The function is then applied to the data from each group. (e.g. tapply(mtcars$mpg,mtcars$cyl,mean) - mean mpg based on engine cylinders). tapply seems to only like working on a single column at a time.
+ - split - splits the data up into groups. e.g. split(mtcars,mtcars$cyl) returns a list of dataframes in which all the cars have the same number of cylinders 
+ 
+ Note that tapply is effectively a split and apply
+ ```R
+ > tapply(mtcars$hp,mtcars$cyl,max)
+   4   6   8 
+ 113 175 335
+ > lapply(split(mtcars$hp,mtcars$cyl),max)
+ $`4`
+ [1] 113
 
+ $`6`
+ [1] 175
+
+ $`8`
+ [1] 335
+ 
+ ```
+ Maybe there are some subtleties to tapply, but lapply(split()) might be more useful?
+ ```R
+ lapply(split(mtcars,mtcars$cyl),function(x) colMeans(x[,c('mpg','hp','disp')]) 
+ + )
+ $`4`
+       mpg        hp      disp 
+  26.66364  82.63636 105.13636 
+
+ $`6`
+       mpg        hp      disp 
+  19.74286 122.28571 183.31429 
+
+ $`8`
+      mpg       hp     disp 
+  15.1000 209.2143 353.1000
+ 
+ ```
+ 
+ ### random numbers
+ 
+ 
+ -  rnorm(n,m,s) generates a vector of length n of **normal** random variables with mean m and standard deviation s (seen this a bunch)
+ 
+ - dnorm(x,mean,sd) - give the value of the probability density function at x for a normal random distribution with given mean and standard deviation
+ - pnorm(q,mean,sd) - give the value of the cumulative distrubution function (the integral of the density up to q(?)) (pnorm(0.75) gives the value of the cumulative at x=0.75, or the probability that random varialbles will be generated with values below 0.75)
+ ```R
+ > pnorm(1) - pnorm(-1)
+ [1] 0.6826895
+ > pnorm(2) - pnorm(-2)
+ [1] 0.9544997
+ ```
+ - qnorm(p) - gives the quantile function - given a probability p, it returns a value q such that random numbers random variables will fall below q with probability p. qnorm and pnorm are inverse functions
+
+These functions (r*,d*,p*,q*) exist for a number of generators (e.g. rpois samples from poisson distribution, qunif gives the quantile for uniform distribution,pexp gives the cumulative for exponential distribution, etc.)
+
+important to set the seed - ```set.seed(2)``` - needed for reproduceability
 
