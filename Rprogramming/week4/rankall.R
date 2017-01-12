@@ -27,6 +27,7 @@ rankall <- function(outcome, num = "best") {
 	# from the set of hospitals when deciding the rankings."
 
 	slimmed<-data[! is.na(data[,outcomes[outcome]])  ,c(2,7,outcomes[outcome])]
+	names(slimmed)[3]<-'outcome'
 	
 	
 	ranked<-data.frame(hospital=character(length=0),state=character(length=0),stringsAsFactors=FALSE)
@@ -69,12 +70,14 @@ rankall <- function(outcome, num = "best") {
 
 
 		#first check that we have some
-		ordering<-order(thisstate[,c(3,1)])
+		ordering<-order(thisstate$outcome,thisstate$Hospital.Name,na.last=TRUE)
 		ranked[nrow(ranked) +1,1:2]<-c(thisstate[ordering[thenum],1],thestate)
+		
 
 		
 		
 	}
+	rownames(ranked)<-ranked$state
 	ranked
 	
 	
