@@ -23,24 +23,59 @@ rankall <- function(outcome, num = "best") {
 	
 	# slimmed - work with only the hospital, state, and outcome columns
 	# keep only the rows for which the outcome is not NA
+	# "Hospitals that do not have data on a particular outcome should be excluded
+	# from the set of hospitals when deciding the rankings."
+
 	slimmed<-data[! is.na(data[,outcomes[outcome]])  ,c(2,7,outcomes[outcome])]
 	
 	
-	ranked<-data.frame(hospitals=character(length=0),states=character(length=0),stringsAsFactors=FALSE)
+	ranked<-data.frame(hospital=character(length=0),state=character(length=0),stringsAsFactors=FALSE)
 	
 	
 	
-	for thestate in states
+	if (num == 'best')
+	{
+		num<-1
+	}
+
+
+	for (thestate in states)
 	{
 		# loop over states
 		# for each state, rank the hospitals (first by outcome, then by name, ignore na)
 		
+		# how many hospitals are in this state?
+		thisstate<-slimmed[slimmed$State == thestate,]
+		maxrows<-nrow(thisstate)
+		if (num == 'worst') 
+		{ 
+			thenum<-maxrows
+		}
+		else
+		{
+			thenum<-num
+		}
+
+		if (thenum > maxrows)
+		{
+			# we want a rank greater than the number of hospitals (with outcome data) in this state
+			# return NA for this state
+
+			#insert a row into ranked, and move to the next state
+			ranked[nrow(ranked)+1,1:2]<-c(NA,thestate)
+			next
+
+		}
+
+
 		#first check that we have some
-		ordering<-order(slimmed[ slimmed$State == thestate,c(3,1)])
+		ordering<-order(thisstate[,c(3,1)])
+		ranked[nrow(ranked) +1,1:2]<-c(thisstate[ordering[thenum],1],thestate)
+
 		
 		
 	}
-	
+	ranked
 	
 	
 	
