@@ -30,7 +30,8 @@ best<-function(state,outcome)
 	
 	# sorted the slimmed dataframe/slice. order by outcome first, then name
 	sorted<-order(slimmed[,3],slimmed[,1],na.last=TRUE)
-	
+	# sorted returns a vector of integers, corresponding to the ordering of the rows
+	# sorted[1] is the 'best' row, so return the name (column 1)
 	return(slimmed[sorted[1],1])
 	
 	
