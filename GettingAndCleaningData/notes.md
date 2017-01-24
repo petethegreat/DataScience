@@ -57,3 +57,86 @@ json<-toJSON(dataframe)
 
 ## data tables
 
+
+## reshaping data
+this page is good [http://seananderson.ca/2013/10/19/reshape.html]
+Sometimes things are organised weirdly. The melt function can be used to "dissolve" a dataframe, making it easier to reshape it into the desired form.
+'''R
+> library('reshape2')
+> mtcars$carname<-rownames(mtcars)
+> melted<-melt(mtcars,id=c('carname','gear','cyl'),measure.vars=c('hp','wt','mpg'))
+> head(melted,n=3)
+        carname gear cyl variable value
+1     Mazda RX4    4   6       hp   110
+2 Mazda RX4 Wag    4   6       hp   110
+3    Datsun 710    4   4       hp    93
+
+> tail(melted,n=3)
+         carname gear cyl variable value
+94  Ferrari Dino    5   6      mpg  19.7
+95 Maserati Bora    5   8      mpg  15.0
+96    Volvo 142E    4   4      mpg  21.4
+
+'''
+melt makes a very tall, thin dataframe ('long format' data), with a column for each of the id variables, and then one 'variable' column and one 'value' column. This makes it very easy to subset the data and individually select the desired variables.
+
+
+dcast can be used to summarise the melted data. dcast takes a melted (molten) dataframe and casts it into  a dataframe (acast casts to array/vector/matrix). Syntax is dcast(melted,formula,aggregate), where melted is the input dataset, formula defines the relationship between id columns and variable columns (x + y ~ z will treat z as dependant on x and y). If there are multiple observations for a given combination of id identifiers, then an aggregate function is used. By default length is used if nothing is specified. 
+
+'''R
+> cylData<-dcast(melted,cyl ~ variable,mean)
+> cylData
+  cyl        hp       wt      mpg
+1   4  82.63636 2.285727 26.66364
+2   6 122.28571 3.117143 19.74286
+3   8 209.21429 3.999214 15.10000
+'''
+This gives the mean hp, wt, and mpg as a function of number of cylinders.
+
+ddply from the plyr package will also do split apply combine type operations.
+'''R
+> ddply(mtcars,.(cyl),summarize,mean=mean(mpg))
+  cyl     mean
+1   4 26.66364
+2   6 19.74286
+3   8 15.10000
+> ddply(mtcars,'cyl',summarize,mean=mean(mpg))
+  cyl     mean
+1   4 26.66364
+2   6 19.74286
+3   8 15.10000
+'''
+
+dplyer - optimised version of plyr
+
+'verbs`
+- select - return subset of columns
+- filter - subset data by row
+- arrange - rename variables
+- mutate - add new rows/columns
+- summarize - generate summary statisttics
+
+kind of the same old operations, but syntax is simpler, can do things in fewer steps.
+Pretty handy.
+Also, for tidying, package tidyr works well. 'gather' merges multiple columns into a single column as a key-value pair (gather(data,key,value,columns_to:gather)). This is similar to melt
+seperate takes one column and seperates it into multiple
+
+
+
+'''R
+> amtcars<-arrange(mtcars,mpg)
+> head(amtcars,n=3)
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb             carname
+1 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4  Cadillac Fleetwood
+2 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4 Lincoln Continental
+3 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4          Camaro Z28
+'''
+can use %>% to pipe things. when doing stuff with dplyr functions, the output from a pipe is implicitly assumed to be the first argument.
+
+## merging data
+merge() - like a join in sql
+merged<-merge(x,y,by.x='yid',by.y='id',all=true)
+select * from x join y on x.yid=y.id
+join from plyr does similar things, fewer features. requires joining columns to have the same name.
+
+
