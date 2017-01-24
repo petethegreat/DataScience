@@ -85,7 +85,7 @@ thecontent=content(thehtml2,as='text')
 theparsedhtml<-htmlparse(thecontent,asText=TRUE)
 XpathSApply(theparsedhtml,...)
 '''
-
+GET can also take authenticate options for connecting to websites that require usernames and passwords.
 
 
 
