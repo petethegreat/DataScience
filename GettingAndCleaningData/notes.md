@@ -56,6 +56,40 @@ json<-toJSON(dataframe)
 '''
 
 ## data tables
+Can do certain things much faster than data frames
+
+## HDF5
+Hierarchal Data Format. Designed for storing and organising large amounts of data
+organises things into Datasets (multidimensional arrays), and Groups (hold Datasets)
+Can be used to read and write things to disk. A fraction of a Dataset/dataframe can be read/written at a time, so you do not need to load the full dataset into R to work with a subset of it.
+
+##Reading data from the web
+'''R
+con<-url('www.website.com/pages/webpage.html')
+htmlcode<-readlines(con)
+close(con)
+htmlcode
+'''
+Alternatively (more usefully), use htmlTreeParse:
+'''R
+library('XML')
+theurl<-'www.website.com/pages/webpage.html'
+thehtml<-htmlTreeParse(url,useInternalNode=TRUE)
+XPathSApply(thehtml,'//node',xmlValue)
+'''
+use GET to pull the html, then parse it
+'''R
+library('httr')
+thehtml2<-GET(theurl)
+thecontent=content(thehtml2,as='text')
+theparsedhtml<-htmlparse(thecontent,asText=TRUE)
+XpathSApply(theparsedhtml,...)
+'''
+
+
+
+
+
 
 
 ## reshaping data
