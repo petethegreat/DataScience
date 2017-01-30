@@ -173,4 +173,13 @@ merged<-merge(x,y,by.x='yid',by.y='id',all=true)
 select * from x join y on x.yid=y.id
 join from plyr does similar things, fewer features. requires joining columns to have the same name.
 
+## Aggregate 
+The Aggregate function is super useful.
+
+'''R
+aggregate(cleaned[,3:68],by=cleaned[,c('subject','activity')],FUN=mean)
+'''
+Above line returns a dataframe. The data (columns 3 to 68) are grouped (by row) based on the two variables/columns 'subject' and 'activity'. For each group, the function mean is applied. This seems like a good way to do split-apply-combine on multiple columns simultaneously. Aggregate can also accept a formula form as input. 
+
+
 
