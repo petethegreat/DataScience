@@ -21,4 +21,6 @@ just a skeleton now. Will flesh things out later
 * P(A) is the prevalence, or probability of the condition in the population (given no other information)
 
 P(A|B) = P(B|A)P(A) / P(B) = P(B|A) P(A)/ ( P(B|A) P(A) + P(B|A<sup>c</sup>) P(A<sup>c</sup>))
+
+
 P(A|B) = P(B|A) P(A)/ ( P(B|A) P(A) + (1- P(B<sup>c</sup>|A<sup>c</sup>)) (1-P(A)))
