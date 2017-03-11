@@ -141,7 +141,20 @@ The by.total dataframe gives statistics on the fraction of time each function wa
 
 The by.self dataframe gives statistics on the lowest level functions. This shows how much of the total time was spent executing things in each function, on its own, which is often more useful
 
-
+### Replicate/vectorisation
+replicate(n,expr) will carry out the expr n times, returning a list. For example
+'''R
+> moose<-replicate(3,rnorm(5))
+> moose
+           [,1]        [,2]       [,3]
+[1,] -1.2137739  0.18631382 -0.9759883
+[2,] -1.7646895 -0.46471197  0.8194045
+[3,] -1.0854025 -0.08313484  1.1734603
+[4,]  0.2003816  2.31647469 -0.1686119
+[5,]  1.4291066 -0.11919838 -0.3003799
+'''
+ 
+This can be faster than a for loop as replicate is a wrapper for sapply/lapply, which use internal c routines. For loops do a bunch of interpreting and condition testing that are relatively expensive.
 
 
  
