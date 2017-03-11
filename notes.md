@@ -130,9 +130,9 @@ Generally, elapsed time is the total and in "most" cases will be the sum of the 
 
 ### Rprof
 Rprof('outfilename.out') samples the function call stack at regular intervals and records what it sees in the file given as argument. It does this until it Rprof(NULL) is called. The sample interval can be specified as an optional argument. At each sample, Rprof writes out the function call stack, which looks something like.
-'''
+```R
 "function1" "function2" "function3"
-'''
+```
 This line indicates that R is currently working on function3, which was called by function2, which was called by function1. function1 should be somthing that you told R to do. 
 
 This output by itself is not the most useful. The command summaryRprof('outfilename.out') will read the supplied filename, and return a list. The list contains two dataframes, $by.total and $by.self. 

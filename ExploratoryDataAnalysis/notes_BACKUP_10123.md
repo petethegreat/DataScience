@@ -1,5 +1,6 @@
 # Exploratory Data Analysis
 
+<<<<<<< HEAD
 ## preliminary
 there are a couple of different plotting systems in R:
 - base system - this is built-in functionality. Lots of flexibility and control, but it can take a bit of tweaking to get everything arranged the way you want.
@@ -30,6 +31,8 @@ with(data, plot(x=x_col,y=y_col))
 -- xlab/ylab - axis labels
 
 
+
+=======
 
 ## ggplot2
 learn to use this, put notes here.
@@ -63,3 +66,4 @@ These are kinda the same thing. The course was kinda light on theory, will add s
 ### PCA
 
  
+>>>>>>> 30458785fedc3f4badb105867388e2761d7e9ce6
