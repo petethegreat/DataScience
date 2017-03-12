@@ -17,7 +17,7 @@ The probability of both $A$ and $B$ occuring is not neccasrily just their sum, a
 Bayes rule allows us to invert the condition on a conditional probablility. That is, if we know the probability of $B$ given $A$, then we can infer the probability of $A$ when $B$ is satisfied/given/present. 
 
 $$
-P(A|B) = \frac{P(B|A)P(A)} { P(B) }
+P(A|B) = \frac{P(B|A)P(A)} { P(B) } \\
 P(A|B) = \frac{P(B|A)P(A)} { P(B|A)P(A) + P(B|A^c)P(A^c) }
 $$
 Consider a diagnostic test. We can assess the test for sensitivity and specificity (see below), which describe how the test behaves in the presence of the disease. After taking the test, however, we are probably more interested in inverting this relationship - what is the probability of having the disease given the test was positive?
