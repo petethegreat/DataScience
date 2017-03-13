@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Stats Notes</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Stats Notes</h1>
+
+<h2>Conditional probability - Bayes Rule</h2>
+
+<ul>
+<li>\(P(A)\) - the probability of A occuring</li>
+<li>\(P(A \cap B)\) - the intersection - the probability of both \(A\) and \(B\) occuring</li>
+<li>\(P(A \cup B)\) - the union - the probability of \(A\) or \(B\) (or both) occuring</li>
+</ul>
+
+<p>Note that 
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+The probability of both \(A\) and \(B\) occuring is not neccasrily just their sum, as this double counts the intersection. This is why avangers don&#39;t have double the crit rate of other classes, if you roll double 20s, it only counts as one crit. If \(A\) is a roll of 20 on one die, and \(B\) is a roll of 20 on the other, then the probabilty of a crit is given by \(P(A \cap B)\), which is \(1/20 + 1/20 - 1/20 \times 1/20 = 0.0975\)</p>
+
+<h2>Bayes rule</h2>
+
+<p>Bayes rule allows us to invert the condition on a conditional probablility. That is, if we know the probability of \(B\) given \(A\), then we can infer the probability of \(A\) when \(B\) is satisfied/given/present. </p>
+
+<p>\[
+\begin{aligned}
+P(A|B) &= \frac{P(B|A)P(A)} { P(B) } \\
+P(A|B) &= \frac{P(B|A)P(A)} { P(B|A)P(A) + P(B|A^c)P(A^c) }
+\end{aligned}
+\]</p>
+
+<p>Consider a diagnostic test. We can assess the test for sensitivity and specificity (see below), which describe how the test behaves in the presence of the disease. After taking the test, however, we are probably more interested in inverting this relationship - what is the probability of having the disease given the test was positive?</p>
+
+<p>In this case, \(A\) is a condition (or disease), whereas \(B\) is an observation (the state of a test - positive or negative)</p>
+
+<ul>
+<li>\(P(A|B\)) is the probability of \(A\) given \(B\) (i.e., how likely are we to have the disease given a positive test?)
+
+<ul>
+<li>this is the <strong>positive predictive value</strong></li>
+</ul></li>
+<li>\(P(B|A)\) is the probability of \(B\) given \(A\) (i.e., how likely is the test to be positive when the disease is present)
+
+<ul>
+<li>this is the probability of a &ldquo;true positive&rdquo;</li>
+<li>for disease tests this is called the <strong>sensitivity</strong></li>
+</ul></li>
+<li>\(P(B|A^{c})\) is probability of \(B\) in the absence of \(A\) (i.e. how likely are we to have the disease when the test is false)</li>
+<li>\(P(B^c|A^c)\) is probability of not B in the absence of A (i.e. how likely are we to not have the disease when the test is false)
+
+<ul>
+<li>this is the probability of a &ldquo;true negative&rdquo;</li>
+<li>for disease tests this is called the <strong>sensitivity</strong></li>
+</ul></li>
+<li>\(P(A^c|B^c)\)  is the probability of not having the disease given the test was negative
+
+<ul>
+<li>this is the <strong>negative predictive value</strong></li>
+</ul></li>
+<li>\(P(A)\) is the <strong>prevalence</strong> , or probability of the condition in the population (given no other information)</li>
+</ul>
+
+<p>Bayes rule gives the probability of having the disease given a positive test:</p>
+
+<p>\[
+\begin{aligned}
+P(A|B) &= \frac{P(B|A) P(A)}{  P(B|A) P(A) + P(B|A^c) P(A^c)}\\
+P(A|B) &= \frac{P(B|A) P(A)}{  P(B|A) P(A) + (1-P(B^c|A^c))(1-P(A))} 
+\end{aligned}
+\]</p>
+
+<h2>Distributions</h2>
+
+<h3>Bernoulli</h3>
+
+<p>coin flip. Outcome is 0 (failure) or 1 (success), with probability of success p
+probability mass function is
+\[ 
+P(x) = p^x(1-p)^{1-x}
+\]</p>
+
+<h3>Binomial</h3>
+
+<p>Gives the probability of getting some number of successes for \(k\) samples of a Bernouli distribution (e.g. probability of rolling a die 6 times and getting 3 4&#39;s, probability of having 7 girls from 8 children)</p>
+
+<h3>Normal</h3>
+
+<p>gaussian</p>
+
+<h3>Exponential</h3>
+
+<p>discrete and continuous forms</p>
+
+<h2>Variance and stuff</h2>
+
+<h3>Bessel&#39;s correction</h3>
+
+<p>standard deviaion is defined variance is defined as \(\sum((x_i - \bar(x))^2)/\sqrt{n-1}\). This is to avoid bias. The population variance is given by \(\sum_i (x_i -\mu)^2/N\). In reality, we do not know \(\mu\), only the sample mean \(\bar{x}\), so we compute the sample variance using \(\bar{x}\) instead of \(\mu\). While the sample mean is an unbiased estimator of the population mean, there is some uncertainty in it. The effect of using the sample mean instead of the population mean is to decrease the variance. What we want is the some of the squared distances from the population mean, but we end up using the sum of squared distances from the sample mean. The sample mean can be shown to be that value that minimises the sum of squared distances, and thus using it will always underestimate the population variance (unless the sample mean happens to be equal to the population mean)</p>
+
+<h3>standard error of the mean</h3>
+
+<h2>Confidence Intervals</h2>
+
+<h3>normal confidence intervals</h3>
+
+<h3>t statistics and confidence intervals</h3>
+
+<h2>hypothesis testing</h2>
+
+</body>
+
+</html>

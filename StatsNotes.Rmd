@@ -18,18 +18,19 @@ Bayes rule allows us to invert the condition on a conditional probablility. That
 
 $$
 \begin{aligned}
-P(A|B) &=& \frac{P(B|A)P(A)} { P(B) } \\
-P(A|B) &=& \frac{P(B|A)P(A)} { P(B|A)P(A) + P(B|A^c)P(A^c) }
+P(A|B) &= \frac{P(B|A)P(A)} { P(B) } \\\
+P(A|B) &= \frac{P(B|A)P(A)} { P(B|A)P(A) + P(B|A^c)P(A^c) }
 \end{aligned}
 $$
 
 Consider a diagnostic test. We can assess the test for sensitivity and specificity (see below), which describe how the test behaves in the presence of the disease. After taking the test, however, we are probably more interested in inverting this relationship - what is the probability of having the disease given the test was positive?
 
-* $A$ is condition (e.g a disease)
-* $B$ is observation  (e.g. a positive result on a test for the disease)
+In this case, $A$ is a condition (or disease), whereas $B$ is an observation (the state of a test - positive or negative)
+
 
 
 * $P(A|B$) is the probability of $A$ given $B$ (i.e., how likely are we to have the disease given a positive test?)
+    * this is the **positive predictive value**
 * $P(B|A)$ is the probability of $B$ given $A$ (i.e., how likely is the test to be positive when the disease is present)
     * this is the probability of a "true positive"
 	* for disease tests this is called the **sensitivity**
@@ -37,15 +38,16 @@ Consider a diagnostic test. We can assess the test for sensitivity and specifici
 * $P(B^c|A^c)$ is probability of not B in the absence of A (i.e. how likely are we to not have the disease when the test is false)
     * this is the probability of a "true negative"
 	* for disease tests this is called the **sensitivity**
-
-* $P(A)$ is the prevalence, or probability of the condition in the population (given no other information)
+* $P(A^c|B^c)$  is the probability of not having the disease given the test was negative
+    * this is the **negative predictive value**
+* $P(A)$ is the **prevalence** , or probability of the condition in the population (given no other information)
 
 Bayes rule gives the probability of having the disease given a positive test:
 
 $$
 \begin{aligned}
-P(A|B) &=& \frac{P(B|A) P(A)}{  P(B|A) P(A) + P(B|A^c) P(A^c)} \\
-P(A|B) &=& \frac{P(B|A) P(A)}{  P(B|A) P(A) + (1-P(B^c|A^c))(1-P(A))} \\
+P(A|B) &= \frac{P(B|A) P(A)}{  P(B|A) P(A) + P(B|A^c) P(A^c)}\\\
+P(A|B) &= \frac{P(B|A) P(A)}{  P(B|A) P(A) + (1-P(B^c|A^c))(1-P(A))} 
 \end{aligned}
 $$
 
@@ -58,3 +60,28 @@ probability mass function is
 $$ 
 P(x) = p^x(1-p)^{1-x}
 $$
+
+### Binomial
+Gives the probability of getting some number of successes for $k$ samples of a Bernouli distribution (e.g. probability of rolling a die 6 times and getting 3 4's, probability of having 7 girls from 8 children)
+
+### Normal
+gaussian
+
+### Exponential
+discrete and continuous forms
+
+
+## Variance and stuff
+### Bessel's correction
+standard deviaion is defined variance is defined as $\sum((x_i - \bar(x))^2)/\sqrt{n-1}$. This is to avoid bias. The population variance is given by $\sum_i (x_i -\mu)^2/N$. In reality, we do not know $\mu$, only the sample mean $\bar{x}$, so we compute the sample variance using $\bar{x}$ instead of $\mu$. While the sample mean is an unbiased estimator of the population mean, there is some uncertainty in it. The effect of using the sample mean instead of the population mean is to decrease the variance. What we want is the some of the squared distances from the population mean, but we end up using the sum of squared distances from the sample mean. The sample mean can be shown to be that value that minimises the sum of squared distances, and thus using it will always underestimate the population variance (unless the sample mean happens to be equal to the population mean)
+
+### standard error of the mean
+
+## Confidence Intervals
+
+### normal confidence intervals
+
+### t statistics and confidence intervals
+
+## hypothesis testing
+
