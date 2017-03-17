@@ -73,7 +73,7 @@ discrete and continuous forms
 
 ## Variance and stuff
 ### Bessel's correction
-standard deviaion is defined variance is defined as $\sum((x_i - \bar(x))^2)/\sqrt{n-1}$. This is to avoid bias. The population variance is given by $\sum_i (x_i -\mu)^2/N$. In reality, we do not know $\mu$, only the sample mean $\bar{x}$, so we compute the sample variance using $\bar{x}$ instead of $\mu$. While the sample mean is an unbiased estimator of the population mean, there is some uncertainty in it. The effect of using the sample mean instead of the population mean is to decrease the variance. What we want is the some of the squared distances from the population mean, but we end up using the sum of squared distances from the sample mean. The sample mean can be shown to be that value that minimises the sum of squared distances, and thus using it will always underestimate the population variance (unless the sample mean happens to be equal to the population mean)
+standard deviaion is defined variance is defined as $\sum((x_i - (\bar{x})^2)/\sqrt{n-1}$. This is to avoid bias. The population variance is given by $\sum_i (x_i -\mu)^2/N$. In reality, we do not know $\mu$, only the sample mean $\bar{x}$, so we compute the sample variance using $\bar{x}$ instead of $\mu$. While the sample mean is an unbiased estimator of the population mean, there is some uncertainty in it. The effect of using the sample mean instead of the population mean is to decrease the variance. What we want is the some of the squared distances from the population mean, but we end up using the sum of squared distances from the sample mean. The sample mean can be shown to be that value that minimises the sum of squared distances, and thus using it will always underestimate the population variance (unless the sample mean happens to be equal to the population mean)
 
 ### standard error of the mean
 
@@ -84,4 +84,14 @@ standard deviaion is defined variance is defined as $\sum((x_i - \bar(x))^2)/\sq
 ### t statistics and confidence intervals
 
 ## hypothesis testing
+### Error types
+A type I error is incorrectly rejecting the null hypothesis (a false positive). In cases where the null hypothesis is actually true, it will still be rejected with probability $(1-\alpha)$, where $\alpha$ is the value of the confidence interval being used. 
+
+A type II error is where we incorrectly accept the null hypothesis (a false negative). 
+## Power
+
+Say we have a sample, and two hypotheses: $H_0: \mu = \mu_0$ and $H_A: mu > mu_0$.  The statistical power is the probability of rejecting the null hypothesis, for a given scenario (e.g $\mu = \mu_\alpha, n = 1000$, etc.). To reject the null, the test statistic needs to lie outside our confidence interval. Power is the probability that this will occur if the alternate hypothesis is true, that is , it is the probability that the alternate hypothesis will generate a test statistic outside of the null hypothesis's confidence interval. 
+
+If the distributions of the test statistics are narrow and well seperated, then there should be quite a lot of power (the alternate scenario is unlkely to produce a statistic inside the null's confidence interval), something close to 100%. If the distributions are seperated but broad, then there is some probabilty of the alternate scenario yielding a statistic inside the null's interval.
+
 
