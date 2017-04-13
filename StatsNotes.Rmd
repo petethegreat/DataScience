@@ -77,13 +77,39 @@ standard deviaion is defined variance is defined as $\sum((x_i - (\bar{x})^2)/\s
 
 ### standard error of the mean
 
+The variance of the sample mean is given by
+
+$$ var(\bar{X}) = \frac{sigma^2}{n} $$
+
+Even though we don't know the population variance ($\sigma^2$), the sample variance ($S^2$) is an unbiased estimate of this, so we can get a pretty good idea.
+
+The standard deviation of the sample mean is then given by 
+$$
+\begin{aligned}
+sd(\bar{X}) &= \frac{sigma}{\sqrt{n}}  \\
+ &\approx \frac{S}{\sqrt{n}}  \\
+\end{aligned}
+$$
+
+In general, the standard deviation of a statistic is called the standard error of that statistic.
 ## Confidence Intervals
+
+
 
 ### normal confidence intervals
 
 ### t statistics and confidence intervals
 
 ## hypothesis testing
+
+Hypothesis testing is used to determine whether or not a measurement is statistically significant. For example, we might measure a mean value to be $\bar{X} = 0.1$, and want to know if this mean is close enough to or appreciably different from a mean of zero.
+
+In hypothesis testing, a null hypothesis is compared to an alternate hypothesis. The null hypothesis is usually something along the lines of "there is no difference between those two samples", "the population mean is equal to zero", etc. It supposes that there is no underlying feature in the data, and that any variation is only due to statistical fluctuations. The alternate hypothesis supposes that there __is__ some underlying feature in the data, such as a nonzero difference or mean. The alternate hypothesis may either be one sided ("the population mean is greater than Y" or "the population mean is less than Y "), or two sided ("the population mean is not equal to Y"). The null hypothesis is assumed by default, we require a certain threshold of significance from our data in order to overturn the null hypothesis and instead accept the alternate hypothesis. 
+
+For example, we might want to be at least 95\% certain that the population mean is greater than some threshold. To start, we assume the null hypothesis (that the population mean is equal to our threshold). We then calculate the probability that the underlying population distribution could produce a sample with mean that we observed.  We compute an appropriate statistic (either the t-statistic or the z-statistic, or something else) of our sample mean under the null hypothesis. 
+
+<!-- We compute the 95\% confidence interval for the mean under the null hypothesis. For a one sided test, this is either the 5\% or 95\% quantile (```qnorm(0.95, lower.tail=TRUE)``` gives the 95\%, ```lower.tail=FALSE``` would give the 5\% ), while for a two sided test we want 2.5\% of the probability to remain on either sideso our interval would be $mu_0 \pm Q(0.975)\times \sigma/\sqrt(n)$ .   -->
+
 ### Error types
 A type I error is incorrectly rejecting the null hypothesis (a false positive). In cases where the null hypothesis is actually true, it will still be rejected with probability $(1-\alpha)$, where $\alpha$ is the value of the confidence interval being used. 
 
@@ -94,4 +120,11 @@ Say we have a sample, and two hypotheses: $H_0: \mu = \mu_0$ and $H_A: mu > mu_0
 
 If the distributions of the test statistics are narrow and well seperated, then there should be quite a lot of power (the alternate scenario is unlkely to produce a statistic inside the null's confidence interval), something close to 100%. If the distributions are seperated but broad, then there is some probabilty of the alternate scenario yielding a statistic inside the null's interval.
 
+# Regression Models
+
+## least squares
+
+## residuals
+
+## inference
 
