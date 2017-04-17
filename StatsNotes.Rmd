@@ -128,3 +128,14 @@ If the distributions of the test statistics are narrow and well seperated, then 
 
 ## inference
 
+## Generalised Linear Models
+
+instead of transforming data and then applying a linear model, generalised linear models include any data transformation, so can work directly with observed data.
+
+have three things
+
+- An exponential family model for the variation in the response
+- A systematic component (a linear predictor)
+- A link function that connects the means of the response to the predictor
+
+In the bernouli example, The response is assumed to follow a Bernoulli distribution $E[Y_i] = \mu_i$, where $0 \leq \mu_i \leq 1$. The predictor is $\eta$, which is treated as a linear variable. The link function $g(\mu) = \eta$ give $\eta$ as a function of $\mu$. For the Bernoulli case, the link function $\eta = g(\mu) = \mathrm{log}\frac{\mu}{1-\mu}$ maps $\mu$ (which runs from 0 to 1) to $\eta$ (which runs from $-\infty$ to $\infty$)

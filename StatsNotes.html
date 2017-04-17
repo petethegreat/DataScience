@@ -263,6 +263,22 @@ P(x) = p^x(1-p)^{1-x}
 
 <h3>standard error of the mean</h3>
 
+<p>The variance of the sample mean is given by</p>
+
+<p>\[ var(\bar{X}) = \frac{sigma^2}{n} \]</p>
+
+<p>Even though we don&#39;t know the population variance (\(\sigma^2\)), the sample variance (\(S^2\)) is an unbiased estimate of this, so we can get a pretty good idea.</p>
+
+<p>The standard deviation of the sample mean is then given by 
+\[
+\begin{aligned}
+sd(\bar{X}) &= \frac{sigma}{\sqrt{n}}  \
+ &\approx \frac{S}{\sqrt{n}}  \
+\end{aligned}
+\]</p>
+
+<p>In general, the standard deviation of a statistic is called the standard error of that statistic.</p>
+
 <h2>Confidence Intervals</h2>
 
 <h3>normal confidence intervals</h3>
@@ -270,6 +286,14 @@ P(x) = p^x(1-p)^{1-x}
 <h3>t statistics and confidence intervals</h3>
 
 <h2>hypothesis testing</h2>
+
+<p>Hypothesis testing is used to determine whether or not a measurement is statistically significant. For example, we might measure a mean value to be \(\bar{X} = 0.1\), and want to know if this mean is close enough to or appreciably different from a mean of zero.</p>
+
+<p>In hypothesis testing, a null hypothesis is compared to an alternate hypothesis. The null hypothesis is usually something along the lines of &ldquo;there is no difference between those two samples&rdquo;, &ldquo;the population mean is equal to zero&rdquo;, etc. It supposes that there is no underlying feature in the data, and that any variation is only due to statistical fluctuations. The alternate hypothesis supposes that there <strong>is</strong> some underlying feature in the data, such as a nonzero difference or mean. The alternate hypothesis may either be one sided (&ldquo;the population mean is greater than Y&rdquo; or &ldquo;the population mean is less than Y &rdquo;), or two sided (&ldquo;the population mean is not equal to Y&rdquo;). The null hypothesis is assumed by default, we require a certain threshold of significance from our data in order to overturn the null hypothesis and instead accept the alternate hypothesis. </p>
+
+<p>For example, we might want to be at least 95\% certain that the population mean is greater than some threshold. To start, we assume the null hypothesis (that the population mean is equal to our threshold). We then calculate the probability that the underlying population distribution could produce a sample with mean that we observed.  We compute an appropriate statistic (either the t-statistic or the z-statistic, or something else) of our sample mean under the null hypothesis. </p>
+
+<!-- We compute the 95\% confidence interval for the mean under the null hypothesis. For a one sided test, this is either the 5\% or 95\% quantile (```qnorm(0.95, lower.tail=TRUE)``` gives the 95\%, ```lower.tail=FALSE``` would give the 5\% ), while for a two sided test we want 2.5\% of the probability to remain on either sideso our interval would be $mu_0 \pm Q(0.975)\times \sigma/\sqrt(n)$ .   -->
 
 <h3>Error types</h3>
 
@@ -282,6 +306,28 @@ P(x) = p^x(1-p)^{1-x}
 <p>Say we have a sample, and two hypotheses: \(H_0: \mu = \mu_0\) and \(H_A: mu > mu_0\).  The statistical power is the probability of rejecting the null hypothesis, for a given scenario (e.g \(\mu = \mu_\alpha, n = 1000\), etc.). To reject the null, the test statistic needs to lie outside our confidence interval. Power is the probability that this will occur if the alternate hypothesis is true, that is , it is the probability that the alternate hypothesis will generate a test statistic outside of the null hypothesis&#39;s confidence interval. </p>
 
 <p>If the distributions of the test statistics are narrow and well seperated, then there should be quite a lot of power (the alternate scenario is unlkely to produce a statistic inside the null&#39;s confidence interval), something close to 100%. If the distributions are seperated but broad, then there is some probabilty of the alternate scenario yielding a statistic inside the null&#39;s interval.</p>
+
+<h1>Regression Models</h1>
+
+<h2>least squares</h2>
+
+<h2>residuals</h2>
+
+<h2>inference</h2>
+
+<h2>Generalised Linear Models</h2>
+
+<p>instead of transforming data and then applying a linear model, generalised linear models include any data transformation, so can work directly with observed data.</p>
+
+<p>have three things</p>
+
+<ul>
+<li>An exponential family model for the variation in the response</li>
+<li>A systematic component (a linear predictor)</li>
+<li>A link function that connects the means of the response to the predictor</li>
+</ul>
+
+<p>In the bernouli example, The response is assumed to follow a Bernoulli distribution \(E[Y_i] = \mu_i\), where \(0 \leq \mu_i \leq 1\). The predictor is \(\eta\), which is treated as a linear variable. The link function \(g(\mu) = \eta\) give \(\eta\) as a function of \(\mu\). For the Bernoulli case, the link function \(\eta = g(\mu) = \mathrm{log}\frac{\mu}{1-\mu}\) maps \(\mu\) (which runs from 0 to 1) to \(\eta\) (which runs from \(-\infty\) to \(\infty\))</p>
 
 </body>
 
