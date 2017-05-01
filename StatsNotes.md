@@ -128,6 +128,37 @@ If the distributions of the test statistics are narrow and well seperated, then 
 
 ## inference
 
+
+## Residual Stuff
+### leverage and influence
+Can be more specific than just calling something an outlier. Leverage is how far a datapoint's $x$ coordinate is from the mean $\bar{x}$, things further away can potentially affect the regression more. Influence is whether or not an outlying point is trying to pull the fit away from the other points. If a point has leverage, and its associated $y$ coordinate is significantly different from what the regression would predict were that point absent, then the point is using its leverage to exert _influence_ on the fit. leverage is the potential to alter the regression, influence is whether or not it does. A point with little leverage can't have much influence.
+
+```?influence.measures``` gives info on R commands to quantify outliers/influence/leverage. 
+
+Residuals can be normalised using the functions ```rstandard``` and ```rstudent``` . Influence is measured by removing points from the dataset and rerunning the regression. 
+
+The functions ```dffits``` and ```dfbetas``` are also interesting
+
+some diagnostic plots can be shown by passing the lm object directly to the plot function - ```?plot.lm``` has more details. There are six available plots, which can be selected using the "which" argument in the plot call.
+
+
+```r
+moose<-lm(data=mtcars,formula=mpg~wt + factor(am) + hp)
+par(mfrow=c(2,3))
+g<-plot(moose,which=1:6)
+```
+
+![plot of chunk plotlm](figure/plotlm-1.png)
+
+```r
+print(g)
+```
+
+```
+## NULL
+```
+The plot of the residuals vs the fitted values, in particular, is pretty useful. Anything that looks systematic there can be an indication of a fault/defficiency in the model.
+
 ## Generalised Linear Models
 
 instead of transforming data and then applying a linear model, generalised linear models include any data transformation, so can work directly with observed data.
@@ -139,3 +170,4 @@ have three things
 - A link function that connects the means of the response to the predictor
 
 In the bernouli example, The response is assumed to follow a Bernoulli distribution $E[Y_i] = \mu_i$, where $0 \leq \mu_i \leq 1$. The predictor is $\eta$, which is treated as a linear variable. The link function $g(\mu) = \eta$ give $\eta$ as a function of $\mu$. For the Bernoulli case, the link function $\eta = g(\mu) = \mathrm{log}\frac{\mu}{1-\mu}$ maps $\mu$ (which runs from 0 to 1) to $\eta$ (which runs from $-\infty$ to $\infty$)
+
