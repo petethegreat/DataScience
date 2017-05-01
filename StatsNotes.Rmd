@@ -61,6 +61,7 @@ $$
 P(x) = p^x(1-p)^{1-x}
 $$
 
+This gives probability $p$ for $x=1$ and probability $(1-p)$ for $x=0$.
 ### Binomial
 Gives the probability of getting some number of successes for $k$ samples of a Bernouli distribution (e.g. probability of rolling a die 6 times and getting 3 4's, probability of having 7 girls from 8 children)
 
@@ -151,7 +152,7 @@ The plot of the residuals vs the fitted values, in particular, is pretty useful.
 
 ## Generalised Linear Models
 
-instead of transforming data and then applying a linear model, generalised linear models include any data transformation, so can work directly with observed data.
+instead of transforming data and then applying a linear model, generalised linear models include any data transformation, so can work directly with observed data. In a linear model, we attempt to describe the regressor as a linear function of the predictors. In GLMs, we essentially essentiall model some function of the variable as a linear function of the predictors. There is then some math to determine the expected value (mean) of the variable of interest and it's variance, etc.
 
 have three things
 
@@ -160,4 +161,5 @@ have three things
 - A link function that connects the means of the response to the predictor
 
 In the bernouli example, The response is assumed to follow a Bernoulli distribution $E[Y_i] = \mu_i$, where $0 \leq \mu_i \leq 1$. The predictor is $\eta$, which is treated as a linear variable. The link function $g(\mu) = \eta$ give $\eta$ as a function of $\mu$. For the Bernoulli case, the link function $\eta = g(\mu) = \mathrm{log}\frac{\mu}{1-\mu}$ maps $\mu$ (which runs from 0 to 1) to $\eta$ (which runs from $-\infty$ to $\infty$)
+
 
