@@ -1,3 +1,11 @@
+---
+title: "Stats Notes"
+output:
+  html_document:
+    mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  pdf_document:
+    toc: true
+---
 # Stats Notes
 
 ## Conditional probability - Bayes Rule
